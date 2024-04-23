@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Region traffic dispersion measurement results - multi-region-rate-limiter-example</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <h1>Region traffic dispersion measurement results.</h1>
+
+  <h2>Overview</h2>
+
+  <p>This is a measurement of the traffic dispersion of a region with a rate limiter.</p>
+
+  <h2>Description of the data used for the measurement</h2>
+
+  <p>
+    Three regions were used for the measurement.
+    The characteristics of each region are as follows
+  </p>
+
+  <table border="1" style="border-collapse: collapse">
+    <thead>
+      <tr>
+        <th>region</th>
+        <th>quota</th>
+        <th>duration</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>us-west1</td>
+        <td>100 times</td>
+        <td>60 sec.</td>
+      </tr>
+      <tr>
+        <td>us-west2</td>
+        <td>100 times</td>
+        <td>60 sec.</td>
+      </tr>
+      <tr>
+        <td>us-west3</td>
+        <td>50 times</td>
+        <td>60 sec.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ul>
+    <li>quota: Requests per duration(s) limit.</li>
+    <li>duration: Request limit duration(seconds).</li>
+  </ul>
+
+  <p>To verify that traffic is properly distributed among the three regions, traffic is sent with the following contents.</p>
+  <ul>
+    <li>In all, the traffic is sent 1,875 times.</li>
+    <li>Traffic is generated approximately 10.4 times per second.</li>
+  </ul>
+  
+  <h2>Measurement results</h2>
+
+  <p>Below is a graph of the measurement results, where the Y-axis is the number of traffic performed and the X-axis is the time the traffic was requested.</p>
+
+  <p>
+    The graph shows that traffic is appropriately distributed by region.
+    <br>
+    Since <code>us-west1</code> and <code>us-west2</code> have the same <code>quota</code> and <code>duration</code>, we can see that the traffic is approximated.
+    <br>
+    The <code>us-west3</code> has half the <code>quota</code> compared to the other two regions, so the traffic is similarly halved.
+    <br>
+    <br>
+    That is all for the report.
+    <br>
+    For more information on the process of distributing traffic by region and other details, please click <a href="https://github.com/takuya-motoshima/multi-region-rate-limiter-example/">here</a>.
+  </p>
+
+  <div class="chart-container">
+    <canvas id="chart"></canvas>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@1.0.1/dist/chartjs-adapter-moment.min.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
+

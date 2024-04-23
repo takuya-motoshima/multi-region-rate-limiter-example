@@ -1,0 +1,18 @@
+{
+  "name": "multi-region-rate-limiter-example",
+  "version": "1.0.0",
+  "description": "This is sample code for a process that load balances traffic for APIs in multiple regions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Takuya Motoshima <developer.takuyamotoshima@gmail.com> (https://twitter.com/TakuyaMotoshima)",
+  "license": "MIT",
+  "dependencies": {
+    "deep-fusion": "^1.0.3",
+    "ioredis": "^5.4.1",
+    "moment": "^2.30.1",
+    "rate-limiter-flexible": "^5.0.0"
+  }
+}

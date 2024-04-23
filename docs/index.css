@@ -1,0 +1,6 @@
+.chart-container {
+  position: relative;
+  /* height: 60vh; */
+  height: 40vh;
+  margin: 16px 0;
+}
