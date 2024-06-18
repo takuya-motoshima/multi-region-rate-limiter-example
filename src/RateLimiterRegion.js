@@ -28,6 +28,7 @@ module.exports = class Limiter {
    * @param {string} options.appname App Name. This will be used to prefix the rate limiter state name to be stored in the store. For example, 'myapp'.
    * @param {string} options.storeClient.host Host of the Redis server.
    * @param {number} options.storeClient.port Port of the Redis server. Default is 6379.
+   * @param {boolean} options.retry Whether to attempt to reconnect when redis down. Default is false.
    * @throws {Error} Error if required options (appname, storeClient.host, storeClient.port, measure.path) are not set.
    */
   constructor(options = undefined) {
@@ -49,12 +50,15 @@ module.exports = class Limiter {
       throw new Error('The storeClient.port option is required');
 
     // Create a new Redis instance.
-    this.#redis = new Redis({
+    const redisOptions = {
       host: this.#options.storeClient.host,
       port: this.#options.storeClient.port,
-      // enableOfflineQueue: false,
       lazyConnect: true,
-    });
+    };
+    if (!options.retry)
+      // Do not reconnect when redis down.
+      redisOptions.retryStrategy = null;
+    this.#redis = new Redis(redisOptions);
   }
 
   /**
