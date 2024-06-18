@@ -39,6 +39,7 @@ module.exports = class Limiter {
         host: '127.0.0.1',
         port: 6379,
       },
+      retry: false,
     }, options);
 
     // Check the required options.
